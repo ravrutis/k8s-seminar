@@ -7,14 +7,6 @@ spec:
   selector:
     matchLabels:
       app: springmusic-renata
-
-  replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 100%
-      maxUnavailable: 0
-      
   ports:          # Map incoming port to target port
   - name: http    # Setting multiple ports listterns 
     protocol: TCP
@@ -24,6 +16,13 @@ spec:
     protocol: TCP
     port: 443
     targetPort: 1234
+
+  replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
 
   template: # create pods using pod definition in this template
     metadata:
