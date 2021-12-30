@@ -1,17 +1,11 @@
-
 apiVersion: apps/v1
-kind: Service
+kind: Deployment
 metadata:
   name: spring-deployment
 spec:
   selector:
     matchLabels:
-      app: springmusic-renata
-  ports:          # Map incoming port to target port
-    - name: http    # Setting multiple ports listterns 
-      protocol: TCP
-      port: 80
-      targetPort: 8080
+      app: springmusic
 
   replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
   strategy:
@@ -25,10 +19,25 @@ spec:
       # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
       # generated from the deployment name
       labels:
-        app: springmusic-renata
+        app: springmusic
     spec:
       containers:
       - name: springmusic
         image: yanivomc/spring-music:latest
         ports:
         - containerPort: 8080
+
+---
+kind: Service      # Create new service
+apiVersion: v1
+metadata:
+  name: spring-srv
+spec:
+  selector:
+    app: springmusic    # Run on any pod with label - app: myapp
+  ports:          # Map incoming port to target port
+  - name: http    # Setting multiple ports listterns
+    protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
