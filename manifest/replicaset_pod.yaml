@@ -33,5 +33,5 @@ spec:
          - name: test-volume
            hostPath:
            # directory location on host
-           path:  /tmp/files/
+           path: /tmp/files/
            type: Directory
