@@ -1,0 +1,39 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-deployment
+spec:
+  selector:
+    matchLabels:
+      app: springmusic-renata
+
+  replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0
+      
+  ports:          # Map incoming port to target port
+  - name: http    # Setting multiple ports listterns 
+    protocol: TCP
+    port: 80
+    targetPort: 8080
+  - name: https
+    protocol: TCP
+    port: 443
+    targetPort: 1234
+
+  template: # create pods using pod definition in this template
+    metadata:
+      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        app: springmusic-renata
+    spec:
+      containers:
+      - name: springmusic
+        image: yanivomc/spring-music:latest
+        ports:
+        - containerPort: 8080
