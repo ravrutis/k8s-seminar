@@ -8,14 +8,14 @@ spec:
     matchLabels:
       app: springmusic-renata
   ports:          # Map incoming port to target port
-  - name: http    # Setting multiple ports listterns 
-    protocol: TCP
-    port: 80
-    targetPort: 8080
-  - name: https
-    protocol: TCP
-    port: 443
-    targetPort: 1234
+    - name: http    # Setting multiple ports listterns 
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 1234
 
   replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
   strategy:
