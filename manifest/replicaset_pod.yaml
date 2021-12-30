@@ -30,8 +30,7 @@ spec:
           - mountPath: /mnt/files
             name: test-volume
       volumes:
-         - name: test-volume
-           hostPath:
-           # directory location on host
-           path: /tmp/files/
-           type: Directory
+      - name: test-volume
+        hostPath:
+        path: /tmp/files/
+        type: Directory
