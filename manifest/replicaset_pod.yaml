@@ -21,16 +21,16 @@ spec:
       - name: spring-music
         image: yanivomc/spring-music:latest
         volumeMounts:
-        - mountPath: /mnt/files
+        - mountPath: /mnt/files/
           name: test-volume
  
       - name: animals
         image: supergiantkir/animals:bear
         volumeMounts:
-          - mountPath: /mnt/files
+          - mountPath: /mnt/files/
             name: test-volume
       volumes:
       - name: test-volume
         hostPath:
-        path: /tmp/files/
-        type: Directory
+          path: /tmp/files/
+          type: Directory
