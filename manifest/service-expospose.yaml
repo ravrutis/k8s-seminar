@@ -1,6 +1,6 @@
 
 apiVersion: apps/v1
-kind: Deployment
+kind: Service
 metadata:
   name: spring-deployment
 spec:
@@ -12,10 +12,6 @@ spec:
       protocol: TCP
       port: 80
       targetPort: 8080
-    - name: https
-      protocol: TCP
-      port: 443
-      targetPort: 1234
 
   replicas: 2 # tells deployment to run 2 pods matching the template using the ReplicaSet
   strategy:
